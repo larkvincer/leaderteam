@@ -1,22 +1,33 @@
 {
-  "name": "leaderteam",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "mongoose": "^5.0.17",
-    "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11"
-  },
-  "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-google": "^0.9.1"
-  }
+	"name": "leaderteam",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "node ./bin/www",
+		"devstart": "nodemon ./bin/www",
+		"devfront": "gulp watch"
+	},
+	"dependencies": {
+		"body-parser": "^1.18.2",
+		"cookie-parser": "~1.4.3",
+		"debug": "~2.6.9",
+		"express": "~4.16.0",
+		"http-errors": "~1.6.2",
+		"mongoose": "^5.0.17",
+		"morgan": "~1.9.0",
+		"pug": "2.0.0-beta11"
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"babel-preset-env": "^1.6.1",
+		"eslint": "^4.19.1",
+		"eslint-config-google": "^0.9.1",
+		"gulp": "^3.9.1",
+		"gulp-babel": "^7.0.1",
+		"gulp-cli": "^2.0.1",
+		"gulp-concat": "^2.6.1",
+		"gulp-csso": "^3.0.1",
+		"gulp-uglify": "^3.0.0",
+		"nodemon": "^1.17.4"
+	}
 }
