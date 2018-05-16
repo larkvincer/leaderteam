@@ -1,0 +1,46 @@
+.dashboard-menu {
+	display: inline-block;
+	width: 200px;
+	height: 100%;
+	background-color: #191818;
+}
+
+.dashboard-menu_section-heading {
+	display: block;
+	text-transform: uppercase;
+	padding: 0.625em 1em 0.625em 2em;
+	color: #ffffff44;
+}
+
+.dashboard-menu_link {
+	display: block;
+	color: #999;
+	cursor: pointer;
+	padding: 0.625em 1em;
+}
+
+.dashboard-menu_link:hover {
+	background-color: #ffffff22;
+}
+
+.link__selected {
+	background-color: #1f8dd6;
+	color: #fff;
+}
+
+.link__selected:hover {
+	background-color: #1f8dd6;
+}
+
+.block-underline {
+	border-bottom: 1px solid #ffffff22;
+}
+
+.dashboard-menu_heading {
+	color: #fff;
+	font-size: 1.25em;
+	text-transform: uppercase;
+	text-align: center;
+	display: block;
+	padding: 0.625em 1em;
+}

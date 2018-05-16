@@ -1,3 +1,22 @@
 extends layout
 block content
-	h1 This is your dashboard
+	div(class='pure-menu dashboard-menu')
+		span(class='dashboard-menu_heading block-underline') Меню
+		ul(class='pure-menu-list')
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_section-heading') Підлеглі
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_link link__selected') Менеджери
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_link') Супервайзер
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_link block-underline') Мерчиндайзери
+				|
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_section-heading') Підлеглі
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_link') Менеджери
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_link') Супервайзер
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_link block-underline') Мерчиндайзери
