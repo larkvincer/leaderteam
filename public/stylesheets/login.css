@@ -1,0 +1,19 @@
+.form--type-login {
+	border: 1px solid #ddd;
+	padding: 2em;
+}
+
+.block--align-center {
+	margin: auto;
+}
+
+.text--align-center {
+	text-align: center;
+}
+
+.title--width-half {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 1px solid #ddd;
+}
