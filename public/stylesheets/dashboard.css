@@ -1,8 +1,17 @@
+.layout {
+	box-sizing: border-box;
+	height: 100%;
+	padding-bottom: 50px;
+	padding-top: 50px;
+}
+
 .dashboard-menu {
 	display: inline-block;
-	width: 200px;
-	height: 100%;
+	width: 200px!important;
+	height: 100%!important;
 	background-color: #191818;
+	overflow: auto;
+	float: left;
 }
 
 .dashboard-menu_section-heading {
@@ -43,4 +52,21 @@
 	text-align: center;
 	display: block;
 	padding: 0.625em 1em;
+}
+
+.dashboard--header {
+	height: 50px;
+	background-color: #ddd;
+	margin-top: -50px;
+}
+
+.content {
+	height: 100%;
+}
+
+.dashboard--footer {
+	height: 50px;
+	background-color: #fdfdfd;
+	border-top: 1px solid #ddd;
+	margin-bottom: -50px;
 }
