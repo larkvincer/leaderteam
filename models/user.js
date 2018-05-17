@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	firstName: String,
-	lastName: String,
+	firstName: {type: String, trim: true},
+	lastName: {type: String, trim: true},
 	username: {type: String, unique: true, required: true},
 	hashedPassword: {type: String, required: true},
 	createdAt: {type: Date, default: Date.now},

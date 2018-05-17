@@ -6,6 +6,27 @@ html, body {
 	height: 100%;
 }
 
+@font-face {
+	font-family: 'Roboto';
+	font-style: italic;
+	font-weight: 400;
+	src: url('webfonts/Roboto-Italic.ttf');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src: url('webfonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src: url('webfonts/Roboto-Bold.ttf');
+}
+
 body {
-	font: 16px Helvetica, Arial, sans-serif;
+	font: 16px Roboto, Helvetica, Arial, sans-serif;
 }
