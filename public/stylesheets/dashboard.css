@@ -55,6 +55,7 @@
 }
 
 .dashboard--header {
+	font-family: Roboto!important;
 	height: 50px;
 	background-color: #fff;
 	margin-top: -50px;
@@ -69,7 +70,7 @@
 
 .content {
 	height: 100%;
-	line-height: 100%;
+	font-family: Roboto!important;
 	background-color: #f0f0f0;
 	text-align: center;
 	font-size: 3em;

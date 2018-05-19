@@ -6,7 +6,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	res.json({redirect: '/dashboard'});
+	console.log(req.body.username);
+	res.send(req.body);
+	// res.json({redirect: '/dashboard'});
 });
 
 module.exports = router;
