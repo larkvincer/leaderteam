@@ -7,11 +7,16 @@ router.get('/', function(req, res, next) {
 	res.render('login', {title: 'Вхід'});
 });
 
-router.post('/', function(req, res, next) {
-	console.log(req.body.username);
-	res.send(req.body);
-	// res.json({redirect: '/dashboard'});
-});
+// router.post('/', function(req, res, next) {
+// 	console.log(req.body.username);
+// 	res.send(req);
+// 	// res.json({redirect: '/dashboard'});
+// });
+
+router.post('/', passport.authenticate('local', {
+	successRedirect: '/dashboard',
+	failureRedirect: '/',
+}));
 
 passport.use(new LocalStrategy(function(username, password, done) {
 	User.findOne({username: username}, function(err, user) {
