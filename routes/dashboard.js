@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
 	// } else {
 	// 	req.session.counter = 1;
 	// }
-	res.render('dashboard');
+	console.log(req.user);
+	res.render('dashboard', req.user);
 });
 
 module.exports = router;
