@@ -6,8 +6,9 @@ const RoleSchema = new Schema({
 		type: String,
 		unique: true,
 		require: true,
+		trim: true,
 	},
-	permissions: {
+	actions: {
 		type: [String],
 	},
 });

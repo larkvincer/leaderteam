@@ -1,6 +1,3 @@
-function sayHello() {
-	console.log('Hello world');
-}
+var eventer = require('./dashboard.js');
 
-module.exports = sayHello;
-
+eventer();

@@ -115,6 +115,11 @@
 	border-bottom: 1px solid #00000022;
 }
 
+.header__new-role {
+	font-size: 16px!important;
+	float: right;
+}
+
 .content__footer {
 	border-top: 1p solid #00000022;
 }

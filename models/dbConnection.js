@@ -7,10 +7,10 @@ mongoose.Promise = global.Promise;
 (async function() {
 	try {
 		await mongoose.connect(mongoDB);
-	} catch(error) {
+	} catch (error) {
 		console.log('Cannot connect to DATABASE!!!');
 	}
-})()
+})();
 
 const db = mongoose.connection;
 

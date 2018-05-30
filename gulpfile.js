@@ -42,8 +42,6 @@ gulp.task('javascript', function() {
 		.pipe(gulp.dest('./public/dist/'));
 });
 
-gulp.task('build', ['js-production', 'css-production']);
-
 gulp.task('js-watch', function() {
 	return gulp.watch('./public/javascripts/*.js', ['javascript']);
 });
