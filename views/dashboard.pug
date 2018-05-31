@@ -31,23 +31,24 @@ block content
 				|LeaderTeam
 			ul(class='header__list')
 				li(class='header__item')
-					a
+					a(class='header__link' href='/profile')
 						i(class='fa fa-user-alt')
-						|  Мій профіль
+						|Мій профіль
 				li(class='header__item')
-					a
+					a(class='header__link' href='/logout')
 						i(class='fa fa-sign-out-alt')
-						|  Вийти
+						|Вийти
 
 		div(class='content pure-u-1')
 			div(class='content__container')
 				header(class='content__header') Менеджери
 					button(class='pure-button pure-button-primary header__new-role') Додати Менеджера
 				main(class='content__main')
-					if (username === 'larkvincer')
-						|#{username}
-					else
-						|#{username} - pidr
+					#{managers}
+					ul(class='content__list')
+						li(class='content__item')
+						li(class='content__item')
+						li(class='content__item')
 				footer(class='content__footer')
 					ul(class='paginator')
 						li(class='paginator__item paginator__previous')

@@ -88,6 +88,11 @@
 	padding-left: 10px;
 }
 
+.header__link {
+	color: #333!important;
+	text-decoration: none;
+}
+
 .content {
 	min-height: 100%;
 	font-family: Roboto!important;

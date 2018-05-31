@@ -2,10 +2,9 @@
 
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const minifyCSS = require('gulp-csso');
+const minifyCSS = require('gulp-clean-css');
 const minifyJS = require('gulp-uglify');
 const browserify = require('browserify');
-const babelify = require('babelify');
 const stream = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const sourcemaps = require('gulp-sourcemaps');
@@ -27,7 +26,7 @@ gulp.task('javascript', function() {
 	});
 
 	return b
-		.transform('babelify', {presets: ['es2015']})
+		.transform('babelify', {presets: ['env']})
 		.bundle()
 		.pipe(stream('main.js'))
 		.pipe(buffer())

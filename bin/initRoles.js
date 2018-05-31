@@ -1,29 +1,37 @@
 const connection = require('../models/dbConnection.js');
 const Role = require('../models/role');
-const action = require('../models/permissions.js');
+const action = require('../models/constants/actions.js');
+const roles = require('../models/constants/roles.js');
 
 console.log('START CREATION OF ROLES.');
 
 (async function() {
 	const Manager = new Role({
-		name: 'manager',
+		name: roles.MANAGER,
 		actions: [
-			action.CREATE_MANAGERS,
-			action.EDIT_MANAGERS,
+			action.CREATE_MANAGER,
+			action.EDIT_MANAGER,
+			action.LIST_MANAGERS,
 			action.CREATE_SUPERVISER,
 			action.EDIT_SUPERVISER,
+			action.LIST_SUPERVISERS,
+			action.CREATE_CLIENT,
+			action.EDIT_CLIENT,
+			action.LIST_CLIENTS,
+			action.CREATE_TASK,
+			action.LIST_TASKS,
 		],
 	});
 	const Merchandiser = new Role({
-		name: 'merchandiser',
+		name: roles.MERCHANDISER,
 		actions: [],
 	});
 	const Superviser = new Role({
-		name: 'superviser',
+		name: roles.SUPERVISER,
 		actions: [],
 	});
 	const Client = new Role({
-		name: 'client',
+		name: roles.CLIENT,
 		actions: [],
 	});
 

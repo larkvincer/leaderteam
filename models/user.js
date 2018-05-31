@@ -11,6 +11,7 @@ const UserSchema = new Schema({
 	createdBy: {type: String, required: true},
 	createdAt: {type: Date, default: Date.now},
 	updatedAt: {type: Date, default: Date.now},
+	role: {type: String},
 });
 
 // UserSchema.pre('save', function(next) {
