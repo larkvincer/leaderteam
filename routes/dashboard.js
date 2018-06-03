@@ -4,8 +4,7 @@ const User = require('../models/user');
 const Role = require('../models/role');
 const action = require('../models/constants/actions');
 
-const DEBUG = true;
-if (DEBUG) {
+if (process.env.DEBUG) {
 	router.use(function(req, res, next) {
 		if (!req.user) {
 			req.user = {
