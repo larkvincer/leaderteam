@@ -2,27 +2,42 @@ extends layout
 block content
 	div(class='pure-menu dashboard-menu')
 		span(class='dashboard-menu_heading block-underline') Меню
+		-
+			var showManagers = canDo(permissions, action.LIST_MANAGERS);
+			var showSupers = canDo(permissions, action.LIST_SUPERVISERS);
+			var showMerchs = canDo(permissions, action.LIST_MERCHANDISERS);
+			var showSubordinates = showManagers || showMerchs || showSupers;
+
+			var showClients = canDo(permissions, action.LIST_CLIENTS);
+
+			var showMarkets = canDo(permissions, action.LIST_MARKETS);
 		ul(class='pure-menu-list')
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_section-heading') Підлеглі
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_link link__selected') Менеджери
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_link') Супервайзер
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_link block-underline') Мерчиндайзери
+			if showSubordinates
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_section-heading') Підлеглі
+				if showManagers
+					li(class='pure-menu-item')
+						a(class='dashboard-menu_link link__selected managers') Менеджери
+				if showSupers
+					li(class='pure-menu-item')
+						a(class='dashboard-menu_link') Супервайзер
+				if showMerchs
+					li(class='pure-menu-item')
+						a(class='dashboard-menu_link block-underline') Мерчиндайзери
 
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_section-heading') Клієнти
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_link block-underline') Клієнти
+			if showClients
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_section-heading') Клієнти
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_link block-underline') Клієнти
 
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_section-heading') Супермаркети
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_link') Мережі
-			li(class='pure-menu-item')
-				a(class='dashboard-menu_link block-underline') Магазини
+			if showMarkets
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_section-heading') Супермаркети
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_link') Мережі
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_link block-underline') Магазини
 
 	div(class='pure-g layout')
 		header(class='dashboard--header pure-u-1')
@@ -44,11 +59,23 @@ block content
 				header(class='content__header') Менеджери
 					button(class='pure-button pure-button-primary header__new-role') Додати Менеджера
 				main(class='content__main')
-					#{managers}
-					ul(class='content__list')
-						li(class='content__item')
-						li(class='content__item')
-						li(class='content__item')
+					table(class='pure-table content__table')
+						thead
+							th Логін
+							th Прізвище
+							th Ім'я
+							th Дата створення
+							th Операції
+						tbody
+							each manager in managers
+								- var lastName = manager.lastName?manager.lastName:'--'
+								- var firstName = manager.firstName?manager.firstName:'--'
+								tr
+									td #{manager.username}
+									td #{lastName}
+									td #{firstName}
+									td #{new Date(manager.createdAt).toLocaleString('uk')}
+									td Видалити
 				footer(class='content__footer')
 					ul(class='paginator')
 						li(class='paginator__item paginator__previous')

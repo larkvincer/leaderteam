@@ -18,4 +18,12 @@ module.exports = Object.freeze({
 	CREATE_TASK: 'create task',
 	COMPLETE_TASK: 'complete task',
 	LIST_TASKS: 'list tasks',
+
+	CREATE_MARKETNET: 'create market network',
+	EDIT_MARKETNET: 'edit market network',
+	LIST_MARKETNET: 'list market network',
+
+	CREATE_MARKET: 'create market',
+	EDIT_MARKET: 'edit market',
+	LIST_MARKETS: 'list market',
 });

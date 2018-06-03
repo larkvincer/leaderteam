@@ -10,5 +10,12 @@ module.exports = function() {
 				}
 			});
 		});
+
+		const managers = document.querySelector('.managers');
+		console.log(managers);
+		managers.addEventListener('click', function(event) {
+
+		});
 	});
 };
+

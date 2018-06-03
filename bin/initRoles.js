@@ -22,17 +22,24 @@ console.log('START CREATION OF ROLES.');
 			action.LIST_TASKS,
 		],
 	});
-	const Merchandiser = new Role({
-		name: roles.MERCHANDISER,
-		actions: [],
-	});
 	const Superviser = new Role({
 		name: roles.SUPERVISER,
-		actions: [],
+		actions: [
+			action.CREATE_TASK,
+		],
+	});
+	const Merchandiser = new Role({
+		name: roles.MERCHANDISER,
+		actions: [
+			action.LIST_TASKS,
+			action.COMPLETE_TASK,
+		],
 	});
 	const Client = new Role({
 		name: roles.CLIENT,
-		actions: [],
+		actions: [
+			action.LIST_TASKS,
+		],
 	});
 
 	try {
