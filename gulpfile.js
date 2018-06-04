@@ -3,6 +3,7 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const minifyCSS = require('gulp-clean-css');
+const sass = require('gulp-sass');
 const minifyJS = require('gulp-uglify');
 const browserify = require('browserify');
 const stream = require('vinyl-source-stream');
@@ -11,10 +12,11 @@ const sourcemaps = require('gulp-sourcemaps');
 const log = require('gulplog');
 
 
-gulp.task('css', function() {
-	return gulp.src('./public/stylesheets/*.css')
-		.pipe(concat('main.css'))
-		.pipe(minifyCSS())
+gulp.task('scss', function() {
+	return gulp.src('./public/stylesheets/*.scss')
+		.pipe(concat('main.scss'))
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+		// .pipe(minifyCSS())
 		.pipe(gulp.dest('./public/dist/'));
 });
 
@@ -42,6 +44,6 @@ gulp.task('js-watch', function() {
 	return gulp.watch('./public/javascripts/*.js', ['javascript']);
 });
 gulp.task('css-watch', function() {
-	return gulp.watch('./public/stylesheets/*.css', ['css']);
+	return gulp.watch('./public/stylesheets/*.scss', ['scss']);
 });
 gulp.task('watch', ['js-watch', 'css-watch']);

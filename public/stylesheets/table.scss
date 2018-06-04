@@ -1,0 +1,31 @@
+$thead-padding: 15px;
+$tbody-padding: 10px;
+$table-shadow: 0 0 3px 1px rgba(0,0,0,0.1);
+$hover-color: #ddd;
+
+.content__table {
+	box-shadow: $shadow;
+	width: 100%;
+	min-width: 500px;
+	border-collapse: collapse;
+	// border-style: hidden;
+}
+
+.table__head {
+	border-bottom: 3px solid $hover-color;
+}
+
+.table__head th {
+	padding: $thead-padding;
+}
+
+.table__body td {
+	padding: $tbody-padding;
+	border-collapse: collapse;
+	border: 1px solid $hover-color;
+}
+
+.table__row:hover {
+	background-color: $hover-color;
+	// color: #fff;
+}
