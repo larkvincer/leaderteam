@@ -11,6 +11,8 @@ block content
 			var showClients = canDo(permissions, action.LIST_CLIENTS);
 
 			var showMarkets = canDo(permissions, action.LIST_MARKETS);
+			var showMarketNets = canDo(permissions, action.LIST_MARKETNETS);
+			var showMarketsSection = showMarkets || showMarketNets;
 		ul(class='pure-menu-list')
 			if showSubordinates
 				li(class='pure-menu-item')
@@ -31,13 +33,15 @@ block content
 				li(class='pure-menu-item')
 					a(class='dashboard-menu_link block-underline') Клієнти
 
-			if showMarkets
+			if showMarketsSection
 				li(class='pure-menu-item')
 					a(class='dashboard-menu_section-heading') Супермаркети
-				li(class='pure-menu-item')
-					a(class='dashboard-menu_link') Мережі
-				li(class='pure-menu-item')
-					a(class='dashboard-menu_link block-underline') Магазини
+				if showMarketNets
+					li(class='pure-menu-item')
+						a(class='dashboard-menu_link') Мережі
+				if showMarkets
+					li(class='pure-menu-item')
+						a(class='dashboard-menu_link block-underline') Магазини
 
 	div(class='pure-g layout')
 		header(class='dashboard--header pure-u-1')
@@ -59,23 +63,24 @@ block content
 				header(class='content__header') Менеджери
 					button(class='pure-button pure-button-primary header__new-role') Додати Менеджера
 				main(class='content__main')
-					table(class='pure-table content__table')
-						thead
+					table(class='content__table')
+						thead.table__head
 							th Логін
+							th Посада
 							th Прізвище
 							th Ім'я
 							th Дата створення
-							th Операції
-						tbody
+						tbody.table__body
 							each manager in managers
 								- var lastName = manager.lastName?manager.lastName:'--'
 								- var firstName = manager.firstName?manager.firstName:'--'
-								tr
-									td #{manager.username}
+								tr.table__row
+									td
+										a(href='/a') #{manager.username}
+									td #{manager.role}
 									td #{lastName}
 									td #{firstName}
 									td #{new Date(manager.createdAt).toLocaleString('uk')}
-									td Видалити
 				footer(class='content__footer')
 					ul(class='paginator')
 						li(class='paginator__item paginator__previous')

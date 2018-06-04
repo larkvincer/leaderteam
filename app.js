@@ -15,6 +15,7 @@ const flash = require('connect-flash');
 // Routes
 const loginRouter = require('./routes/login');
 const dashboardRouter = require('./routes/dashboard');
+const managersRouter = require('./routes/managers');
 
 const app = express();
 
@@ -51,6 +52,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use('/', loginRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/dashboard', managersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

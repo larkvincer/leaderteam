@@ -20,6 +20,7 @@ console.log('START CREATION OF ROLES.');
 			action.LIST_CLIENTS,
 			action.CREATE_TASK,
 			action.LIST_TASKS,
+			action.LIST_MARKETS,
 		],
 	});
 	const Superviser = new Role({

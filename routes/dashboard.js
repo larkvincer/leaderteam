@@ -3,42 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Role = require('../models/role');
 const action = require('../models/constants/actions');
-
-if (process.env.DEBUG) {
-	router.use(function(req, res, next) {
-		if (!req.user) {
-			req.user = {
-				username: 'larkvincer',
-				role: 'manager',
-			};
-		};
-		next();
-	});
-}
-router.use(function(req, res, next) {
-	if (req.user) {
-		return next();
-	}
-
-	res.redirect('/');
-});
-
-
-router.get('/managers', async function(req, res, next) {
-	let payload = {};
-	payload.action = action;
-	try {
-		const allowedActions = (await Role.findOne({name: req.user.role})).actions;
-		payload.permissions = allowedActions;
-		payload.canDo = canDo;
-		if (canDo(allowedActions, action.LIST_MANAGERS)) {
-			payload.managers = await User.find({createdBy: req.user.username});
-		}
-	} catch (error) {
-		res.status(500).send('Error');
-	}
-	res.render('dashboard', payload);
-});
+const roles = require('../models/constants/roles');
 
 router.get('/merchandisers', async function(req, res, next) {
 	try {

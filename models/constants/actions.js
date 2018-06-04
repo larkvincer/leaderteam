@@ -21,9 +21,9 @@ module.exports = Object.freeze({
 
 	CREATE_MARKETNET: 'create market network',
 	EDIT_MARKETNET: 'edit market network',
-	LIST_MARKETNET: 'list market network',
+	LIST_MARKETNETS: 'list market networks',
 
 	CREATE_MARKET: 'create market',
 	EDIT_MARKET: 'edit market',
-	LIST_MARKETS: 'list market',
+	LIST_MARKETS: 'list markets',
 });
