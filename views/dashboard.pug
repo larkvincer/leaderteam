@@ -3,15 +3,15 @@ block content
 	div(class='pure-menu dashboard-menu')
 		span(class='dashboard-menu_heading block-underline') Меню
 		-
-			var showManagers = canDo(permissions, action.LIST_MANAGERS);
-			var showSupers = canDo(permissions, action.LIST_SUPERVISERS);
-			var showMerchs = canDo(permissions, action.LIST_MERCHANDISERS);
+			var showManagers = canDo(permissions, actions.LIST_MANAGERS);
+			var showSupers = canDo(permissions, actions.LIST_SUPERVISERS);
+			var showMerchs = canDo(permissions, actions.LIST_MERCHANDISERS);
 			var showSubordinates = showManagers || showMerchs || showSupers;
 
-			var showClients = canDo(permissions, action.LIST_CLIENTS);
+			var showClients = canDo(permissions, actions.LIST_CLIENTS);
 
-			var showMarkets = canDo(permissions, action.LIST_MARKETS);
-			var showMarketNets = canDo(permissions, action.LIST_MARKETNETS);
+			var showMarkets = canDo(permissions, actions.LIST_MARKETS);
+			var showMarketNets = canDo(permissions, actions.LIST_MARKETNETS);
 			var showMarketsSection = showMarkets || showMarketNets;
 		ul(class='pure-menu-list')
 			if showSubordinates
@@ -19,7 +19,7 @@ block content
 					a(class='dashboard-menu_section-heading') Підлеглі
 				if showManagers
 					li(class='pure-menu-item')
-						a(class='dashboard-menu_link link__selected managers') Менеджери
+						a(class='dashboard-menu_link managers') Менеджери
 				if showSupers
 					li(class='pure-menu-item')
 						a(class='dashboard-menu_link') Супервайзер
@@ -76,7 +76,7 @@ block content
 								- var firstName = manager.firstName?manager.firstName:'--'
 								tr.table__row
 									td
-										a(href='/a') #{manager.username}
+										a(href=`/dashboard/managers/${manager.username}`) #{manager.username}
 									td #{manager.role}
 									td #{lastName}
 									td #{firstName}

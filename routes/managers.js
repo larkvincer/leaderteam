@@ -21,7 +21,28 @@ if (process.env.DEBUG) {
 
 router.use(isAuthenticated);
 
-router.get('/managers/:username', async function(req, res) {
+router.get('/managers', async function(req, res) {
+	let payload = {};
+	payload.actions = actions;
+	payload.managers = [];
+	try {
+		const allowedActions = (await Role.findOne({name: req.user.role})).actions;
+		payload.permissions = allowedActions || [];
+		payload.canDo = canDo;
+		if (canDo(allowedActions, actions.LIST_MANAGERS)) {
+			payload.managers = await User.find({
+				createdBy: req.user.username,
+				role: roles.MANAGER,
+			});
+		}
+		res.render('dashboard', payload);
+	} catch (error) {
+		throw error;
+		res.status(500).send(error);
+	}
+});
+
+router.get('/managers/:username', async function(req, res, next) {
 	// check permissions
 	if (checkPermission(req.user.role, actions.LIST_MANAGERS)) {
 		try {
@@ -36,26 +57,6 @@ router.get('/managers/:username', async function(req, res) {
 
 	console.log('Im here');
 	res.status(404).send('hello');
-});
-
-router.get('/managers', async function(req, res) {
-	let payload = {};
-	payload.actions = actions;
-	try {
-		const allowedActions = (await Role.findOne({name: req.user.role})).actions;
-		payload.permissions = allowedActions;
-		payload.canDo = canDo;
-		if (canDo(allowedActions, action.LIST_MANAGERS)) {
-			payload.managers = await User.find({
-				createdBy: req.user.username,
-				role: roles.MANAGER,
-			});
-		}
-		res.render('dashboard', payload);
-	} catch (error) {
-		throw error;
-		res.status(500).send(error);
-	}
 });
 
 module.exports = router;
