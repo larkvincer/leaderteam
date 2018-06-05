@@ -19,7 +19,10 @@ block content
 					a(class='dashboard-menu_section-heading') Підлеглі
 				if showManagers
 					li(class='pure-menu-item')
-						a(class='dashboard-menu_link managers') Менеджери
+						a(
+							class=`dashboard-menu_link
+								link__selected ${mangers?'link__selected':''}`
+							) Менеджери
 				if showSupers
 					li(class='pure-menu-item')
 						a(class='dashboard-menu_link') Супервайзер
@@ -63,24 +66,7 @@ block content
 				header(class='content__header') Менеджери
 					button(class='pure-button pure-button-primary header__new-role') Додати Менеджера
 				main(class='content__main')
-					table(class='content__table')
-						thead.table__head
-							th Логін
-							th Посада
-							th Прізвище
-							th Ім'я
-							th Дата створення
-						tbody.table__body
-							each manager in managers
-								- var lastName = manager.lastName?manager.lastName:'--'
-								- var firstName = manager.firstName?manager.firstName:'--'
-								tr.table__row
-									td
-										a(href=`/dashboard/managers/${manager.username}`) #{manager.username}
-									td #{manager.role}
-									td #{lastName}
-									td #{firstName}
-									td #{new Date(manager.createdAt).toLocaleString('uk')}
+					block dashboard__content
 				footer(class='content__footer')
 					ul(class='paginator')
 						li(class='paginator__item paginator__previous')

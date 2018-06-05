@@ -32,7 +32,7 @@ router.get('/', async function(req, res, next) {
 // });
 
 router.post('/', passport.authenticate('local', {
-	successRedirect: '/dashboard',
+	successRedirect: '/dashboard/managers',
 	failureRedirect: '/',
 	failureFlash: true,
 }));
