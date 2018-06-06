@@ -1,0 +1,32 @@
+.button-warning {
+	background-color: rgb(223, 117, 20)!important;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	height: 35px;
+}
+
+.manager-container {
+	display: flex;
+}
+
+.manager__form {
+	flex-grow: 2;
+}
+
+.agenda {
+	display: flex;
+	flex-grow: 1;
+	align-items: flex-end;
+}
+
+.agenda__icon {
+	font-size: 125px;
+	margin-right: 10px;
+}
+
+.agenda__info td {
+	padding: 5px 5px 0 0;
+}
+
+.row-name {
+	color: #999;
+}

@@ -21,7 +21,6 @@ exports.getPayload = async function(role) {
 	let permissions;
 	try {
 		permissions = (await Role.findOne({name: role})).actions;
-		console.log('In getPayload method: ', permissions);
 	} catch (error) {
 		permissions = [];
 	}

@@ -1,14 +1,34 @@
 extends dashboard
 block dashboard__content
-	.agenda
-		i(class='fa fa-user-tie' style='font-size: 150px')
-	form.pure-form.pure-form-stacked
-		label(for='lastName') Прізвище:
-		input(class='pure-input-1-4'
-			name='lastName' disabled
-			value=user.lastName)
+	.manager-container
+		.agenda
+			i(class='fa fa-user-tie agenda__icon')
+			table.agenda__info
+				tbody
+					tr
+						td.row-name логін:
+						td #{user.username}
+					tr
+						td.row-name посада:
+						td #{user.role}
+					tr
+						td.row-name ким творено:
+						td #{user.createdBy}
+					tr
+						td.row-name дата створення:
+						td #{new Date(user.createdAt).toLocaleDateString('uk')}
+					tr
+						td.row-name останнє оновлення:
+						td #{new Date(user.updatedAt).toLocaleDateString('uk')}
+		form.pure-form.pure-form-stacked.manager__form
+			label(for='lastName') Прізвище:
+			input(class='pure-input-1-2'
+				name='lastName' disabled
+				value=user.lastName)
 
-		label(for='firstName') Ім'я:
-		input(class='pure-input-1-4'
-			name='firstName' disabled
-			value=user.firstName)
+			label(for='firstName') Ім'я:
+			input(class='pure-input-1-2'
+				name='firstName' disabled
+				value=user.firstName)
+		if canDo(permissions, actions.EDIT_MANAGER)
+			button.pure-button.button-warning Редагувати

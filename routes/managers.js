@@ -51,12 +51,10 @@ router.get('/managers/:username', async function(req, res, next) {
 		if (user) {
 			const payload = await getPayload(req.user.role);
 			payload.user = user;
-			console.log(user);
-			res.render('manager', payload).send();
+			return res.render('manager', payload);
 		}
 	}
 
-	console.log('Im here');
 	res.status(403).send('Nea');
 });
 
