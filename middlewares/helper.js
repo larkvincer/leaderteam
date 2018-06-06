@@ -10,7 +10,7 @@ exports.canDo = function(allowedActions, action) {
 exports.getAlloweActions = async function(role) {
 	let actions;
 	try {
-		actions = await Role.find({name: role}).actions;
+		actions = (await Role.findOne({name: role})).actions;
 	} catch (error) {
 		console.error(error);
 	}
@@ -20,7 +20,8 @@ exports.getAlloweActions = async function(role) {
 exports.getPayload = async function(role) {
 	let permissions;
 	try {
-		permissions = await Role.find({name: role}).actions;
+		permissions = (await Role.findOne({name: role})).actions;
+		console.log('In getPayload method: ', permissions);
 	} catch (error) {
 		permissions = [];
 	}

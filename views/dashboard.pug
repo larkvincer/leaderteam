@@ -19,10 +19,9 @@ block content
 					a(class='dashboard-menu_section-heading') Підлеглі
 				if showManagers
 					li(class='pure-menu-item')
-						a(
-							class=`dashboard-menu_link
-								link__selected ${mangers?'link__selected':''}`
-							) Менеджери
+						- var isSelected = managers?'link_seleted':''
+						a(class=`dashboard-menu_link ${isSelected}`)
+							|Менеджери
 				if showSupers
 					li(class='pure-menu-item')
 						a(class='dashboard-menu_link') Супервайзер

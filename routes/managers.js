@@ -22,7 +22,7 @@ if (process.env.DEBUG) {
 router.use(isAuthenticated);
 
 router.get('/managers', async function(req, res) {
-	const payload = getPayload();
+	const payload = await getPayload(req.user.role);
 	payload.managers = [];
 	try {
 		if (canDo(payload.permissions, actions.LIST_MANAGERS)) {
@@ -40,10 +40,7 @@ router.get('/managers', async function(req, res) {
 
 router.get('/managers/:username', async function(req, res, next) {
 	// check permissions
-	console.log(req.user.role);
 	const allowedActions = await getAlloweActions(req.user.role);
-	console.log(allowedActions);
-	console.log(await Role.find({name: req.user.name}));
 	if (canDo(allowedActions, actions.LIST_MANAGERS)) {
 		let user;
 		try {
@@ -52,9 +49,9 @@ router.get('/managers/:username', async function(req, res, next) {
 			res.status(500).send();
 		}
 		if (user) {
-			const payload = await getPayload();
+			const payload = await getPayload(req.user.role);
 			payload.user = user;
-			console.log(payload);
+			console.log(user);
 			res.render('manager', payload).send();
 		}
 	}

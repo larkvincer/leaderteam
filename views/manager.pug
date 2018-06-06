@@ -1,3 +1,14 @@
 extends dashboard
 block dashboard__content
-	h1 This is manager
+	.agenda
+		i(class='fa fa-user-tie' style='font-size: 150px')
+	form.pure-form.pure-form-stacked
+		label(for='lastName') Прізвище:
+		input(class='pure-input-1-4'
+			name='lastName' disabled
+			value=user.lastName)
+
+		label(for='firstName') Ім'я:
+		input(class='pure-input-1-4'
+			name='firstName' disabled
+			value=user.firstName)
