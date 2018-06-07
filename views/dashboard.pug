@@ -19,8 +19,10 @@ block content
 					a(class='dashboard-menu_section-heading') Підлеглі
 				if showManagers
 					li(class='pure-menu-item')
-						- var isSelected = managers?'link_seleted':''
-						a(class=`dashboard-menu_link ${isSelected}`)
+						- var isSelected = managers?'link__selected':''
+						a(
+							href='/dashboard/managers'
+							class=`dashboard-menu_link ${isSelected}`)
 							|Менеджери
 				if showSupers
 					li(class='pure-menu-item')
