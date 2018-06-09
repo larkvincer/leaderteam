@@ -1,4 +1,4 @@
-const connection = require('../models/dbConnection.js');
+const db = require('../models/dbConnection.js');
 const Role = require('../models/role');
 const action = require('../models/constants/actions.js');
 const roles = require('../models/constants/roles.js');
@@ -6,6 +6,8 @@ const roles = require('../models/constants/roles.js');
 console.log('START CREATION OF ROLES.');
 
 (async function() {
+	await db.connect();
+
 	const Manager = new Role({
 		name: roles.MANAGER,
 		actions: [
@@ -93,7 +95,7 @@ console.log('START CREATION OF ROLES.');
 		console.log(error);
 		return;
 	}
-	connection.close();
+	db.close();
 	console.log('ROLES CREATED.');
 })();
 
