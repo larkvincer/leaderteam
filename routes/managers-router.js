@@ -38,7 +38,6 @@ router.get('/managers/:username',
 			const user = await getManager(req.params.username);
 			// TODO Proper handle error
 			if (!user) {
-				// return res.status(404);
 				throw new Error('No such manager.');
 			}
 			const payload = getTemplatePayload(permissions);
@@ -47,25 +46,5 @@ router.get('/managers/:username',
 		}
 		res.status(501).send();
 	}));
-
-// router.get('/managers/:username', async function(req, res, next) {
-// 	// check permissions
-// 	const allowedActions = await getAlloweActions(req.user.role);
-// 	if (canDo(allowedActions, actions.LIST_MANAGERS)) {
-// 		let user;
-// 		try {
-// 			user = await User.findOne({username: req.params.username});
-// 		} catch (error) {
-// 			res.status(500).send();
-// 		}
-// 		if (user) {
-// 			const payload = await getPayload(req.user.role);
-// 			payload.user = user;
-// 			return res.render('manager', payload);
-// 		}
-// 	}
-
-// 	res.status(403).send('Nea');
-// });
 
 module.exports = router;
