@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://127.0.0.1/leaderteam';
+const mongoDB = `${process.env.DB_HOST}/${process.env.DB}`;
 
 mongoose.Promise = global.Promise;
 

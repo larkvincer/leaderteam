@@ -1,4 +1,4 @@
-const roles = require('../../models/constants/roles');
+// const roles = require('../../models/constants/roles');
 const Role = require('../../models/role');
 const actions = require('../../models/constants/actions');
 
@@ -18,3 +18,8 @@ exports.getTemplatePayload = function(permissions) {
 	};
 };
 
+exports.wrapAsync = function(fn) {
+	return function(req, res, next) {
+		fn(req, res, next).catch(next);
+	};
+};

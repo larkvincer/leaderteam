@@ -9,3 +9,7 @@ exports.getManagersByCreator = async function(username) {
 	});
 };
 
+exports.getManager = async function(username) {
+	return await User.findOne({username, role: roles.MANAGER});
+};
+

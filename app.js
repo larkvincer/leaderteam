@@ -6,6 +6,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const db = require('./models/dbConnection');
+
 // Authentication imports
 const passport = require('passport');
 const session = require('express-session');
@@ -36,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // DB connection
-require('./models/dbConnection');
+db.connect();
 
 // servce static files
 app.use(express.static(path.join(__dirname, 'public/dist/')));
