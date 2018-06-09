@@ -13,9 +13,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 
 // Routes
-const loginRouter = require('./routes/login');
-const dashboardRouter = require('./routes/dashboard');
-const managersRouter = require('./routes/managers');
+const routing = require('./routes');
 
 const app = express();
 
@@ -49,10 +47,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-app.use('/', loginRouter);
-app.use('/dashboard', dashboardRouter);
-app.use('/dashboard', managersRouter);
+// Plug in routers
+routing(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

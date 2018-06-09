@@ -1,9 +1,8 @@
-const express = require('express');
-const router = express.Router();
+const managersRouter = require('./managers-router');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-	res.render('index', {title: 'Express'});
-});
 
-module.exports = router;
+function exp(app) {
+	app.use('/dashboard', managersRouter);
+}
+
+module.exports = exp;
