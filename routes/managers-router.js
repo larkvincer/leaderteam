@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const isAuthenticated = require('../middlewares/auth');
 const actions = require('../models/constants/actions');
+const roles = require('../models/constants/roles');
 const {canDo, getPermissions,
 	getTemplatePayload, wrapAsync} = require('./logic/common');
 const {getManagersByCreator, getManager} = require('./logic/managers');
@@ -24,9 +25,10 @@ router.get('/managers',
 	wrapAsync(async function(req, res, next) {
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.LIST_MANAGERS)) {
-			const payload = getTemplatePayload(permissions);
-			payload.managers = await getManagersByCreator(req.user.username);
-			return res.render('managers', payload);
+			const payload = getTemplatePayload(
+				permissions, roles.MANAGER);
+			payload.users = await getManagersByCreator(req.user.username);
+			return res.render('users', payload);
 		}
 		res.status(501).send();
 	}));
@@ -40,9 +42,10 @@ router.get('/managers/:username',
 			if (!user) {
 				throw new Error('No such manager.');
 			}
-			const payload = getTemplatePayload(permissions);
+			const payload = getTemplatePayload(
+				permissions, roles.MANAGER);
 			payload.user = user;
-			return res.render('manager', payload);
+			return res.render('user', payload);
 		}
 		res.status(501).send();
 	}));

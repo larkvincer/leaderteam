@@ -1,0 +1,20 @@
+extends dashboard
+block dashboard__content
+	table(class='content__table')
+		thead.table__head
+			th Логін
+			th Посада
+			th Прізвище
+			th Ім'я
+			th Дата створення
+		tbody.table__body
+			each user in users
+				- var lastName = user.lastName?user.lastName:'--'
+				- var firstName = user.firstName?user.firstName:'--'
+				tr.table__row
+					td
+						a(href=`/dashboard/${user.role}s/${user.username}`) #{user.username}
+					td #{user.role}
+					td #{lastName}
+					td #{firstName}
+					td #{new Date(user.createdAt).toLocaleString('uk')}

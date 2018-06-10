@@ -4,6 +4,14 @@ exports.getUser = async function(username) {
 	return await User.findOne({username});
 };
 
-exports.getUserByRole = async function(role) {
+exports.getUserByNameAndRole = async function(username, role) {
+	return await User.findOne({username, role});
+};
+
+exports.getUsersByCreatorAndRole = async function(creator, role) {
+	return await User.find({createdBy: creator, role});
+};
+
+exports.getUsersByRole = async function(role) {
 	return await User.find({role});
 };

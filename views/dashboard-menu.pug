@@ -8,7 +8,8 @@ div(class='pure-menu dashboard-menu')
 
 		var showClients = canDo(permissions, actions.LIST_CLIENTS);
 
-		var showMarkets = canDo(permissions, actions.LIST_MARKETS); var showMarketNets = canDo(permissions, actions.LIST_MARKETNETS);
+		var showMarkets = canDo(permissions, actions.LIST_MARKETS);
+		var showMarketNets = canDo(permissions, actions.LIST_MARKETNETS);
 		var showMarketsSection = showMarkets || showMarketNets;
 	ul(class='pure-menu-list')
 		if showSubordinates
@@ -16,17 +17,25 @@ div(class='pure-menu dashboard-menu')
 				a(class='dashboard-menu_section-heading') Підлеглі
 			if showManagers
 				li(class='pure-menu-item')
-					- var isSelected = managers?'link__selected':''
+					- var mngSelection = role==='manager'?'link__selected':'';
 					a(
 						href='/dashboard/managers'
-						class=`dashboard-menu_link ${isSelected}`)
+						class=`dashboard-menu_link ${mngSelection}`)
 						|Менеджери
 			if showSupers
 				li(class='pure-menu-item')
-					a(class='dashboard-menu_link') Супервайзер
+					- var sprvSelection = role==='superviser'?'link__selected':'';
+					a(
+						href='/dashboard/supervisers'
+						class=`dashboard-menu_link ${sprvSelection}`
+						) Супервайзер
 			if showMerchs
 				li(class='pure-menu-item')
-					a(class='dashboard-menu_link block-underline') Мерчиндайзери
+					- var mrchSelction = role==='merchandiser'?'link__selected':'';
+					a(
+						href='/dashboard/merchandisers'
+						class=`dashboard-menu_link block-underline ${mrchSelction}`
+						) Мерчиндайзери
 
 		if showClients
 			li(class='pure-menu-item')
