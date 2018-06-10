@@ -1,51 +1,6 @@
 extends layout
 block content
-	div(class='pure-menu dashboard-menu')
-		span(class='dashboard-menu_heading block-underline') Меню
-		-
-			var showManagers = canDo(permissions, actions.LIST_MANAGERS);
-			var showSupers = canDo(permissions, actions.LIST_SUPERVISERS);
-			var showMerchs = canDo(permissions, actions.LIST_MERCHANDISERS);
-			var showSubordinates = showManagers || showMerchs || showSupers;
-
-			var showClients = canDo(permissions, actions.LIST_CLIENTS);
-
-			var showMarkets = canDo(permissions, actions.LIST_MARKETS);
-			var showMarketNets = canDo(permissions, actions.LIST_MARKETNETS);
-			var showMarketsSection = showMarkets || showMarketNets;
-		ul(class='pure-menu-list')
-			if showSubordinates
-				li(class='pure-menu-item')
-					a(class='dashboard-menu_section-heading') Підлеглі
-				if showManagers
-					li(class='pure-menu-item')
-						- var isSelected = managers?'link__selected':''
-						a(
-							href='/dashboard/managers'
-							class=`dashboard-menu_link ${isSelected}`)
-							|Менеджери
-				if showSupers
-					li(class='pure-menu-item')
-						a(class='dashboard-menu_link') Супервайзер
-				if showMerchs
-					li(class='pure-menu-item')
-						a(class='dashboard-menu_link block-underline') Мерчиндайзери
-
-			if showClients
-				li(class='pure-menu-item')
-					a(class='dashboard-menu_section-heading') Клієнти
-				li(class='pure-menu-item')
-					a(class='dashboard-menu_link block-underline') Клієнти
-
-			if showMarketsSection
-				li(class='pure-menu-item')
-					a(class='dashboard-menu_section-heading') Супермаркети
-				if showMarketNets
-					li(class='pure-menu-item')
-						a(class='dashboard-menu_link') Мережі
-				if showMarkets
-					li(class='pure-menu-item')
-						a(class='dashboard-menu_link block-underline') Магазини
+	include ./dashboard-menu.pug
 
 	div(class='pure-g layout')
 		header(class='dashboard--header pure-u-1')

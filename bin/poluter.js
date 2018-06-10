@@ -5,13 +5,15 @@ const LocalStrategy = require('passport-local').Strategy;
 const role = require('../models/constants/roles.js');
 
 const db = require('../models/dbConnection.js');
-
+(async function() {
+	await db.connect();
+})();
 // Passport config
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-const users = generateUsers(15, role.MANAGER, 'larkvincer').concat(
+const users = generateUsers(15, role.MERCHANDISER, 'larkvincer').concat(
 	generateUsers(15, role.SUPERVISER, 'larkvincer')
 );
 
