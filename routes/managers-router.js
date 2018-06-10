@@ -50,4 +50,19 @@ router.get('/managers/:username',
 		res.status(501).send();
 	}));
 
+router.get('/managers/add/new',
+	wrapAsync(async function(req, res, next) {
+		const permissions = await getPermissions(req.user.role);
+		if (canDo(permissions, actions.CREATE_MANAGER)) {
+			const payload = getTemplatePayload(permissions, roles.MANAGER);
+			return res.render('add-user.pug', payload);
+		}
+		throw Error('forbidden.');
+	}));
+
+router.post('/managers/add',
+	wrapAsync(function(req, res, next) {
+		res.send(req.body);
+	}));
+
 module.exports = router;

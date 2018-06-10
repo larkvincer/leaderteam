@@ -1,0 +1,16 @@
+.add-user-form {
+	width: 500px;
+	margin: auto;
+}
+
+.add-user-form input {
+	margin-bottom: 10px;
+	margin-right: 5px;
+	box-sizing: border-box;
+}
+
+.button-success {
+	background: rgb(28, 184, 65)!important; /* this is a green */
+	color: #fff!important;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
