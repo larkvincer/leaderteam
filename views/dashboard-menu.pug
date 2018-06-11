@@ -11,10 +11,14 @@ div(class='pure-menu dashboard-menu')
 		var showMarkets = canDo(permissions, actions.LIST_MARKETS);
 		var showMarketNets = canDo(permissions, actions.LIST_MARKETNETS);
 		var showMarketsSection = showMarkets || showMarketNets;
+
+		var showReportings = true;
+		var showReports = true;
+		var showTasks = true ;
 	ul(class='pure-menu-list')
 		if showSubordinates
 			li(class='pure-menu-item')
-				a(class='dashboard-menu_section-heading') Підлеглі
+				a(class='dashboard-menu_section-heading') Працівники
 			if showManagers
 				li(class='pure-menu-item')
 					- var mngSelection = role==='manager'?'link__selected':'';
@@ -52,3 +56,15 @@ div(class='pure-menu dashboard-menu')
 			if showMarkets
 				li(class='pure-menu-item')
 					a(class='dashboard-menu_link block-underline') Магазини
+
+		if showReportings
+			li(class='pure-menu-item')
+				a(class='dashboard-menu_section-heading') Звітність
+			if showReports
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_link') Звіти
+			if showTasks
+				li(class='pure-menu-item')
+					a(class='dashboard-menu_link block-underline') Завдання
+
+
