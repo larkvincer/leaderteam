@@ -74,10 +74,15 @@ router.post('/managers/add',
 		try {
 			await User.register(user, req.body.password);
 		} catch (error) {
-			// res.redirect('/dashboard/managers/add/new');
-			res.send(req.flash('error'));
+			req.flash('error', error.message);
+			res.redirect('/dashboard/managers/add/new');
 		}
 		res.redirect(`/dashboard/managers/${user.username}`);
+	}));
+
+router.put('/managers/:username/edit',
+	wrapAsync(function(req, res, next) {
+		res.send('I wanna die.');
 	}));
 
 module.exports = router;
