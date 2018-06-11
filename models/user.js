@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
-// const bcrypt = require('bcrypt-nodejs');
 
 const UserSchema = new Schema({
 	firstName: {type: String, trim: true},
