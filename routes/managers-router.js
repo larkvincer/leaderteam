@@ -6,6 +6,7 @@ const roles = require('../models/constants/roles');
 const {canDo, getPermissions,
 	getTemplatePayload, wrapAsync} = require('./logic/common');
 const {getManagersByCreator, getManager} = require('./logic/managers');
+const User = require('../models/user');
 
 if (process.env.DEBUG) {
 	router.use(function(req, res, next) {
@@ -55,14 +56,28 @@ router.get('/managers/add/new',
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.CREATE_MANAGER)) {
 			const payload = getTemplatePayload(permissions, roles.MANAGER);
+			payload.message = req.flash('error');
 			return res.render('add-user.pug', payload);
 		}
 		throw Error('forbidden.');
 	}));
 
 router.post('/managers/add',
-	wrapAsync(function(req, res, next) {
-		res.send(req.body);
+	wrapAsync(async function(req, res, next) {
+		const user = new User({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			username: req.body.username,
+			createdBy: req.user.username,
+			role: roles.MANAGER,
+		});
+		try {
+			await User.register(user, req.body.password);
+		} catch (error) {
+			// res.redirect('/dashboard/managers/add/new');
+			res.send(req.flash('error'));
+		}
+		res.redirect(`/dashboard/managers/${user.username}`);
 	}));
 
 module.exports = router;

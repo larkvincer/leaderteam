@@ -1,13 +1,21 @@
 extends dashboard
 block dashboard__content
-	form.pure-form.add-user-form
-		input(class='pure-input-1' placeholder='Логін')
+	#{message}
+	form.pure-form.add-user-form(method='POST' action='/dashboard/managers/add')
+		input(class='pure-input-1' name='username' placeholder='Логін')
 
-		input(class='pure-input-1' placeholder='Прізвище')
-		input(class='pure-input-1' placeholder='Ім\'я')
+		input(class='pure-input-1' name='lastName' placeholder='Прізвище')
+		input(class='pure-input-1' name='firstName' placeholder='Ім\'я')
 
-		input(class='pure-input-1' placeholder='Пароль')
-		input(class='pure-input-1' placeholder='Підтвердити пароль')
+		input(
+			class='pure-input-1'
+			type='password'
+			name='password'
+			placeholder='Пароль')
+		input(class='pure-input-1'
+			name='confirmPassword'
+			type='password'
+			placeholder='Підтвердити пароль')
 
 		input(
 			class='pure-button button-success pure-input-1'
