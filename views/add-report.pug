@@ -1,7 +1,50 @@
 extends dashboard
 block dashboard__content
-	form.pure-form(method='POST' action='/dashboard/reports')
-		input
-		input
-		input(type='file' name='file' multipart)
-		input(type='submit')
+	form.pure-form.add-user-form(method='POST'
+		enctype='multipart/form-data'
+		action='/dashboard/reports')
+
+		label(for='textarea') Опис:
+		textarea.form__textarea.pure-input-1(
+			required
+			name='description'
+		)
+
+		label Фото:
+		input.pure-input-1(type='file' name='image')
+
+		label Кількість товару в магазині:
+		input.pure-input-1(
+			type='number'
+			name='numberOfGoodsInMarket'
+		)
+
+		label Кількість товару на складі:
+		input.pure-input-1(
+			type='number'
+			name='numberOfGoodsInStore'
+		)
+
+		label(for='expirationDate') Термін придатності:
+		input(
+			class='pure-input-1'
+			type='Date'
+			name='expirationDate')
+
+		label Звичайна ціна:
+		input.pure-input-1(
+			type='number'
+			step='0.1'
+			name='price'
+		)
+
+		label Акційна ціна:
+		input.pure-input-1(
+			type='number'
+			step='0.1'
+			name='salePrice'
+		)
+
+		input(
+			class='pure-button button-success pure-input-1'
+			type='submit')

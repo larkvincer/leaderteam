@@ -13,10 +13,10 @@ const ReportSchema = new Schema({
 	},
 	expirationDate: String,
 	numberOfGoodsInMarket: Number,
-	numberOfGoodsOnStore: Number,
+	numberOfGoodsInStore: Number,
 	price: Schema.Types.Decimal128,
 	salePrice: Schema.Types.Decimal128,
-	task: String,
+	relatedTask: String,
 });
 
 const Report = mongoose.model('Report', ReportSchema);

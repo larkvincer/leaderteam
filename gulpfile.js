@@ -10,6 +10,7 @@ const stream = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const sourcemaps = require('gulp-sourcemaps');
 const log = require('gulplog');
+const path = require('path');
 
 
 gulp.task('scss', function() {
@@ -40,10 +41,17 @@ gulp.task('javascript', function() {
 		.pipe(gulp.dest('./public/dist/'));
 });
 
+const src = path.resolve(__dirname, 'public');
 gulp.task('js-watch', function() {
-	return gulp.watch('./public/javascripts/*.js', ['javascript']);
+	return gulp.watch(
+		'javascripts/*.js',
+		{cwd: src},
+		['javascript']);
 });
 gulp.task('css-watch', function() {
-	return gulp.watch('./public/stylesheets/*.scss', ['scss']);
+	return gulp.watch(
+		'stylesheets/*.scss',
+		{cwd: src},
+		['scss']);
 });
 gulp.task('watch', ['js-watch', 'css-watch']);

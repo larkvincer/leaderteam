@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const {getPermissions, canDo,
 	wrapAsync, getTemplatePayload} = require('./logic/common');
-const {getReports} = require('./logic/reports');
+const {getReports, getMulterConfig} = require('./logic/reports');
 const actions = require('../models/constants/actions');
-const roles = require('../models/constants/roles');
-const fs = require('fs');
+const multer = require('multer');
+const upload = multer(getMulterConfig());
+const Report = require('../models/report');
+
 
 /**
  * @todo Change ACTION TYPE to check.
@@ -18,7 +20,7 @@ router.get('/reports',
 			const payload = await getTemplatePayload(
 				permissions, req.user.role);
 			payload.reports = reports;
-			res.render('reports', payload);
+			return res.render('reports', payload);
 		}
 		throw new Error('Forbidden');
 	}));
@@ -28,7 +30,7 @@ router.get('/reports/form/add',
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.CREATE_TASK)) {
 			const payload = await getTemplatePayload(permissions);
-			res.render('add-report', payload);
+			return res.render('add-report', payload);
 		}
 		throw new Error('Forbidden');
 	}));
@@ -37,11 +39,16 @@ router.get('/reports/form/add',
  * @todo Change ACTION TYPE to check.
  */
 router.post('/reports',
+	upload.single('image'),
 	wrapAsync(async function(req, res, next) {
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.CREATE_TASK)) {
-			res.send(req.body.file);
-			await fs.writeFile('bal.jpg', req.body.file);
+			const report = new Report(Object.assign({
+				image: req.file.filename,
+				creator: req.user.username,
+			}, req.body));
+			await report.save();
+			return res.send(req.body);
 		}
 		throw new Error('Forbidden');
 	}));
