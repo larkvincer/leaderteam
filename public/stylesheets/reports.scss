@@ -1,0 +1,29 @@
+.form__textarea {
+	max-width: 100%;
+	min-width: 100%;
+	margin-bottom: 10px;
+}
+
+
+
+.report-list {
+	
+}
+
+.report-list__item {
+	list-style: none;
+	background-color: #f9f9f9;
+	height: 150px;
+	width: 700px;
+	margin: 20px auto 20px auto;
+	padding: 30px;
+	// box-shadow: $shadow;
+	border: 1px solid #ddd;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+}
+
+.report-list__item:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}

@@ -1,4 +1,8 @@
 extends dashboard
 block dashboard__content
+	ul.report
 	each report in reports
-		p #{report}
+		li.report-list__item
+			a(href='/dashboard/managers') #{report}
+				div.report-list-desc= report.description
+
