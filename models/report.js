@@ -7,7 +7,10 @@ const ReportSchema = new Schema({
 		required: true,
 	},
 	image: String,
-	creator: String,
+	creator: {
+		type: String,
+		required: true,
+	},
 	expirationDate: String,
 	numberOfGoodsInMarket: Number,
 	numberOfGoodsOnStore: Number,

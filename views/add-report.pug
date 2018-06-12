@@ -1,0 +1,7 @@
+extends dashboard
+block dashboard__content
+	form.pure-form(method='POST' action='/dashboard/reports')
+		input
+		input
+		input(type='file' name='file' multipart)
+		input(type='submit')
