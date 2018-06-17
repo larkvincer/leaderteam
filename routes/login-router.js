@@ -4,7 +4,7 @@ const passport = require('passport');
 
 router.get('/', async function(req, res, next) {
 	if (req.user) {
-		return res.redirect('/dashboard');
+		return res.redirect('/dashboard/managers');
 	}
 	res.render('login', {title: 'Вхід', message: req.flash('error')});
 });

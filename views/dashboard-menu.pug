@@ -21,51 +21,68 @@ div(class='pure-menu dashboard-menu')
 				a(class='dashboard-menu_section-heading') Працівники
 			if showManagers
 				li(class='pure-menu-item')
-					- var mngSelection = role==='manager'?'link__selected':'';
+					- var mngSelection = managers?'link__selected':'';
 					a(
 						href='/dashboard/managers'
 						class=`dashboard-menu_link ${mngSelection}`)
 						|Менеджери
 			if showSupers
 				li(class='pure-menu-item')
-					- var sprvSelection = role==='superviser'?'link__selected':'';
+					- var sprvSelection = supervisers?'link__selected':'';
 					a(
 						href='/dashboard/supervisers'
 						class=`dashboard-menu_link ${sprvSelection}`
 						) Супервайзер
 			if showMerchs
 				li(class='pure-menu-item')
-					- var mrchSelction = role==='merchandiser'?'link__selected':'';
+					- var mrchSelection = merchandisers?'link__selected':'';
 					a(
 						href='/dashboard/merchandisers'
-						class=`dashboard-menu_link block-underline ${mrchSelction}`
+						class=`dashboard-menu_link block-underline ${mrchSelection}`
 						) Мерчиндайзери
 
 		if showClients
 			li(class='pure-menu-item')
 				a(class='dashboard-menu_section-heading') Клієнти
 			li(class='pure-menu-item')
-				a(class='dashboard-menu_link block-underline') Клієнти
+				- var clntsSelection = clients?'link__selected':'';
+				a(
+					href='/dashboard/clients'
+					class=`dashboard-menu_link block-underline ${clntsSelection}`
+					) Клієнти
 
 		if showMarketsSection
 			li(class='pure-menu-item')
 				a(class='dashboard-menu_section-heading') Супермаркети
 			if showMarketNets
 				li(class='pure-menu-item')
-					a(class='dashboard-menu_link') Мережі
+					- var netsSelection = marketnets?'link__selected':'';
+					a(
+						href='/dashboard/marketnets',
+						class=`dashboard-menu_link ${netsSelection}`) Мережі
 			if showMarkets
 				li(class='pure-menu-item')
-					a(class='dashboard-menu_link block-underline') Магазини
+					- var marketSelection = markets?'link__selected':'';
+					a(
+						href='/dashboard/markets'
+						class=`dashboard-menu_link block-underline ${marketSelection}`
+						) Магазини
 
 		if showReportings
 			li(class='pure-menu-item')
 				a(class='dashboard-menu_section-heading') Звітність
 			if showReports
 				li(class='pure-menu-item')
+					- var reportsSelection = reports?'link__selected':'';
 					a(
 						href='/dashboard/reports'
-						class='dashboard-menu_link') Звіти
+						class=`dashboard-menu_link ${reportsSelection}`
+						) Звіти
 			if showTasks
 				li(class='pure-menu-item')
-					a(class='dashboard-menu_link block-underline') Завдання
+					- var tasksSelection = tasks?'link__selected':'';
+					a(
+						href='/dashboard/tasks'
+						class=`dashboard-menu_link block-underline ${tasksSelection}`
+						) Завдання
 

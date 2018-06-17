@@ -19,11 +19,11 @@ block content
 
 		div(class='content pure-u-1')
 			div(class='content__container')
-				header(class='content__header') Звіти
+				header(class='content__header')= title
 					a(
 						class='pure-button pure-button-primary header__new-role'
 						href='/dashboard/reports/form/add'
-					) Додати Звіт
+					)= actionTitle
 				main(class='content__main')
 					block dashboard__content
 				// footer(class='content__footer')

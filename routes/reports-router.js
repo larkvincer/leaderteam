@@ -4,6 +4,7 @@ const {getPermissions, canDo,
 	wrapAsync, getTemplatePayload} = require('./logic/common');
 const {getReports, getMulterConfig} = require('./logic/reports');
 const actions = require('../models/constants/actions');
+const titles = require('../models/constants/title');
 const multer = require('multer');
 const upload = multer(getMulterConfig());
 const Report = require('../models/report');
@@ -18,7 +19,7 @@ router.get('/reports',
 		if (canDo(permissions, actions.LIST_TASKS)) {
 			const reports = await getReports();
 			const payload = await getTemplatePayload(
-				permissions, req.user.role);
+				permissions, titles.REPORTS);
 			payload.reports = reports;
 			return res.render('reports', payload);
 		}
@@ -29,7 +30,8 @@ router.get('/reports/form/add',
 	wrapAsync(async function(req, res, next) {
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.CREATE_TASK)) {
-			const payload = await getTemplatePayload(permissions);
+			const payload = await getTemplatePayload(
+				permissions, titles.REPORTS);
 			return res.render('add-report', payload);
 		}
 		throw new Error('Forbidden');
@@ -37,6 +39,7 @@ router.get('/reports/form/add',
 
 /**
  * @todo Change ACTION TYPE to check.
+ * @todo properly handle prices.
  */
 router.post('/reports',
 	upload.single('image'),

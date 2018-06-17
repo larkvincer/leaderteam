@@ -5,6 +5,7 @@ const {getPermissions, canDo,
 const {getUsersByRole,
 	getUserByNameAndRole} = require('./logic/user');
 const roles = require('../models/constants/roles');
+const titles = require('../models/constants/title');
 const actions = require('../models/constants/actions');
 
 if (process.env.DEBUG) {
@@ -26,7 +27,7 @@ router.get('/supervisers',
 		if (canDo(permissions, actions.LIST_SUPERVISERS)) {
 			const merchs = await getUsersByRole(roles.SUPERVISER);
 			const payload = getTemplatePayload(
-				permissions, roles.SUPERVISER);
+				permissions, titles.SUPERVISERS);
 			payload.users = merchs;
 			res.render('users', payload);
 		}
@@ -40,7 +41,7 @@ router.get('/supervisers/:username',
 			const superv = await getUserByNameAndRole(
 				req.params.username, roles.SUPERVISER);
 			const payload = getTemplatePayload(
-				permissions, roles.SUPERVISER);
+				permissions, titles.SUPERVISERS);
 			payload.user = superv;
 			res.render('user', payload);
 		}

@@ -10,13 +10,12 @@ exports.getPermissions = async function(role) {
 	return (await Role.findOne({name: role})).actions;
 };
 
-exports.getTemplatePayload = function(permissions, role) {
-	return {
+exports.getTemplatePayload = function(permissions, title) {
+	return Object.assign({
 		permissions,
 		canDo: exports.canDo,
 		actions,
-		role,
-	};
+	}, title);
 };
 
 exports.wrapAsync = function(fn) {

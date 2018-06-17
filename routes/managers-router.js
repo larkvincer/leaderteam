@@ -3,6 +3,7 @@ const router = express.Router();
 const isAuthenticated = require('../middlewares/auth');
 const actions = require('../models/constants/actions');
 const roles = require('../models/constants/roles');
+const titles = require('../models/constants/title');
 const {canDo, getPermissions,
 	getTemplatePayload, wrapAsync} = require('./logic/common');
 const {getManagersByCreator, getManager} = require('./logic/managers');
@@ -27,7 +28,7 @@ router.get('/managers',
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.LIST_MANAGERS)) {
 			const payload = getTemplatePayload(
-				permissions, roles.MANAGER);
+				permissions, titles.MANAGERS);
 			payload.users = await getManagersByCreator(req.user.username);
 			return res.render('users', payload);
 		}
@@ -44,7 +45,7 @@ router.get('/managers/:username',
 				throw new Error('No such manager.');
 			}
 			const payload = getTemplatePayload(
-				permissions, roles.MANAGER);
+				permissions, titles.MANAGERS);
 			payload.user = user;
 			return res.render('user', payload);
 		}
@@ -55,7 +56,8 @@ router.get('/managers/add/new',
 	wrapAsync(async function(req, res, next) {
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.CREATE_MANAGER)) {
-			const payload = getTemplatePayload(permissions, roles.MANAGER);
+			const payload = getTemplatePayload(
+				permissions, titles.MANAGERS);
 			payload.message = req.flash('error');
 			return res.render('add-user.pug', payload);
 		}
