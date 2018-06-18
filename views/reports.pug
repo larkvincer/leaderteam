@@ -3,6 +3,30 @@ block dashboard__content
 	ul.report
 	each report in reports
 		li.report-list__item
-			a(href='/dashboard/managers') #{report}
-				div.report-list-desc= report.description
+			a.report-list__link(
+				href=`/dashboard/reports/${report.id}`)
+				img(
+					class='report-list__image'
+					src='/images/product-placeholder.png')
+				table.report-list__info
+					tbody
+						tr
+							td.row-name ким створено:
+							td= report.creator
+						tr
+							- var crtDate = new Date(report.createdAt).toLocaleDateString('uk');
+							td.row-name дата створення:
+							td= crtDate
+						tr
+							- var updateDate = new Date(report.updatedAt).toLocaleDateString('uk');
+							td.row-name останнє оновлення:
+							td= updatedDate
+				table.report-list__info
+					tbody
+						tr
+							td.row-name магазин:
+							td= report.market
+						tr
+							td.row-name клієнт:
+							td= report.client
 

@@ -11,12 +11,22 @@ const ReportSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
+	updatedAt: {
+		type: Date,
+		default: Date.now,
+	},
 	expirationDate: String,
 	numberOfGoodsInMarket: Number,
 	numberOfGoodsInStore: Number,
 	price: Schema.Types.Decimal128,
 	salePrice: Schema.Types.Decimal128,
 	relatedTask: String,
+	market: String,
+	client: String,
 });
 
 const Report = mongoose.model('Report', ReportSchema);

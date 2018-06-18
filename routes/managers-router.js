@@ -52,7 +52,7 @@ router.get('/managers/:username',
 		res.status(501).send();
 	}));
 
-router.get('/managers/add/new',
+router.get('/managers/form/add',
 	wrapAsync(async function(req, res, next) {
 		const permissions = await getPermissions(req.user.role);
 		if (canDo(permissions, actions.CREATE_MANAGER)) {
