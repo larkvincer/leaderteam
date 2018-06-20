@@ -1,22 +1,40 @@
 exports.validateUsername = function(username) {
-	const error = '';
-	const illegalChars = /\W/; // allow letters, numbers, and underscores
+	const illegalChars = /\W/;
 
-	if (str == '') {
-		error = 'Please enter Username';
-	} else if ((str.length < 5) || (str.length > 15)) {
-		error = 'Username must have 5-15 characters<br>';
-	} else if (illegalChars.test(str)) {
-		error = 'Please enter valid Username. Use only numbers and alphabets';
+	if (username == '') {
+		return 'Please enter username';
 	}
-	return error;
+	if ((username.length < 3) || (username.length > 15)) {
+		return 'Username must have 3-15 characters';
+	}
+	if (illegalChars.test(username)) {
+		return 'Use only numbers and alphabets for username';
+	}
 };
 
-exports.validatePassword = function() {
-
+exports.validatePassword = function(password) {
+	if (password.length < 5) {
+		return 'Password should contain at least 5 symbols';
+	}
 };
 
-exports.validateName = function() {
+exports.validateConfirmPassword = function(p1, p2) {
+	if (p1 !== p2) {
+		return 'Passwords should match';
+	}
+};
 
+exports.validateName = function(name) {
+	const firstUpper = /^[A-Z]/;
+	if (!firstUpper.test(name)) {
+		return 'Name shoud start from capital.';
+	}
+	if (!name) {
+		return;
+	}
+	const legalCharacters = /[A-z\'\-]+$/;
+	if (!legalCharacters.test(name)) {
+		return 'Name could only contain alphabet and \' \-';
+	}
 };
 
