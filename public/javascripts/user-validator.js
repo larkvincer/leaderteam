@@ -25,12 +25,12 @@ exports.validateConfirmPassword = function(p1, p2) {
 };
 
 exports.validateName = function(name) {
+	if (!name) {
+		return;
+	}
 	const firstUpper = /^[A-Z\u0403-\u042F]/;
 	if (!firstUpper.test(name)) {
 		return 'Name shoud start from capital.';
-	}
-	if (!name) {
-		return;
 	}
 	const legalCharacters = /[A-z\u0403-\u04FF\'\-]+$/;
 	if (!legalCharacters.test(name)) {
