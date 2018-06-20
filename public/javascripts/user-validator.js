@@ -1,5 +1,5 @@
 exports.validateUsername = function(username) {
-	const illegalChars = /\W/;
+	const legalChars = /[\w\u0403-\u04FF]/g;
 
 	if (username == '') {
 		return 'Please enter username';
@@ -7,7 +7,7 @@ exports.validateUsername = function(username) {
 	if ((username.length < 3) || (username.length > 15)) {
 		return 'Username must have 3-15 characters';
 	}
-	if (illegalChars.test(username)) {
+	if (!legalChars.test(username)) {
 		return 'Use only numbers and alphabets for username';
 	}
 };
@@ -25,14 +25,14 @@ exports.validateConfirmPassword = function(p1, p2) {
 };
 
 exports.validateName = function(name) {
-	const firstUpper = /^[A-Z]/;
+	const firstUpper = /^[A-Z\u0403-\u042F]/;
 	if (!firstUpper.test(name)) {
 		return 'Name shoud start from capital.';
 	}
 	if (!name) {
 		return;
 	}
-	const legalCharacters = /[A-z\'\-]+$/;
+	const legalCharacters = /[A-z\u0403-\u04FF\'\-]+$/;
 	if (!legalCharacters.test(name)) {
 		return 'Name could only contain alphabet and \' \-';
 	}
