@@ -8,6 +8,8 @@ const {canDo, getPermissions,
 	getTemplatePayload, wrapAsync} = require('./logic/common');
 const {getManagersByCreator, getManager} = require('./logic/managers');
 const User = require('../models/user');
+const {getUsernameValidators, getPasswordValidators,
+	getValidationErrorsHandler} = require('./middleware/user-validator');
 
 if (process.env.DEBUG) {
 	router.use(function(req, res, next) {
@@ -58,14 +60,18 @@ router.get('/managers/form/add',
 		if (canDo(permissions, actions.CREATE_MANAGER)) {
 			const payload = getTemplatePayload(
 				permissions, titles.MANAGERS);
-			payload.message = req.flash('error');
+			payload.messages = req.flash('error');
 			return res.render('add-user.pug', payload);
 		}
 		throw Error('forbidden.');
 	}));
 
-router.post('/managers/add',
-	wrapAsync(async function(req, res, next) {
+router.post('/managers', [
+	getUsernameValidators(), getPasswordValidators(),
+	getValidationErrorsHandler('/dashboard/managers/form/add'),
+], wrapAsync(async function(req, res, next) {
+	const permissions = await getPermissions(req.user.role);
+	if (canDo(permissions, actions.CREATE_MANAGER)) {
 		const user = new User({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
@@ -77,10 +83,13 @@ router.post('/managers/add',
 			await User.register(user, req.body.password);
 		} catch (error) {
 			req.flash('error', error.message);
-			res.redirect('/dashboard/managers/add/new');
+			res.redirect('/dashboard/managers/form/add');
 		}
 		res.redirect(`/dashboard/managers/${user.username}`);
-	}));
+	} else {
+		throw new Error('Forbidden.');
+	}
+}));
 
 router.put('/managers/:username/edit',
 	wrapAsync(function(req, res, next) {

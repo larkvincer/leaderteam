@@ -21,6 +21,7 @@ block dashboard__content
 						td.row-name останнє оновлення:
 						td #{new Date(user.updatedAt).toLocaleDateString('uk')}
 		form.pure-form.pure-form-stacked.manager__form
+			div.errors
 			label(for='lastName') Прізвище:
 			input(class='pure-input-1-2'
 				name='lastName' disabled
@@ -31,4 +32,4 @@ block dashboard__content
 				name='firstName' disabled
 				value=user.firstName)
 		if canDo(permissions, actions.EDIT_MANAGER)
-			button.pure-button.button-warning Редагувати
+			button.pure-button.button-warning.edit-button Редагувати

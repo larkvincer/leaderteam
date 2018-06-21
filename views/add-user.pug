@@ -1,9 +1,13 @@
 extends dashboard
 block dashboard__content
-	form.pure-form.add-user-form(method='POST' action='/dashboard/managers/add')
-		if message.length
-			span.form__error #{message}
-		input(class='pure-input-1' name='username' placeholder='Логін')
+	form.pure-form.add-user-form(method='POST' action='/dashboard/managers')
+		div.errors
+			if messages.length
+				each message in messages
+					span.form__error #{message}
+		input(class='pure-input-1' name='username'
+			required
+			placeholder='Логін')
 
 		input(class='pure-input-1' name='lastName' placeholder='Прізвище')
 		input(class='pure-input-1' name='firstName' placeholder='Ім\'я')
@@ -12,9 +16,11 @@ block dashboard__content
 			class='pure-input-1'
 			type='password'
 			name='password'
+			required
 			placeholder='Пароль')
 		input(class='pure-input-1'
 			name='confirmPassword'
+			required
 			type='password'
 			placeholder='Підтвердити пароль')
 
