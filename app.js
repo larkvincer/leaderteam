@@ -52,6 +52,15 @@ passport.deserializeUser(User.deserializeUser());
 // Plug in routers
 routing(app);
 
+app.use(function(req, res, next) {
+	if (!req.user) {
+		req.user = {
+			username: 'larkvincer',
+			role: 'superviser',
+		};
+	}
+	next();
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));

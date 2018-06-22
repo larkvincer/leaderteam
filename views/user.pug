@@ -7,7 +7,7 @@ block dashboard__content
 				tbody
 					tr
 						td.row-name логін:
-						td #{user.username}
+						td.username #{user.username}
 					tr
 						td.row-name посада:
 						td #{user.role}
@@ -21,7 +21,7 @@ block dashboard__content
 						td.row-name останнє оновлення:
 						td #{new Date(user.updatedAt).toLocaleDateString('uk')}
 		form.pure-form.pure-form-stacked.manager__form
-			div.errors
+			div.errors.user-errors
 			label(for='lastName') Прізвище:
 			input(class='pure-input-1-2'
 				name='lastName' disabled

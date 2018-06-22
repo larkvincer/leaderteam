@@ -1,6 +1,6 @@
 const {handleUsername, handlePassword,
 	handleConfirmPassword, handleName} = require('./user-form');
-const {enableValidation} = require('./user-edit');
+const {enableEditing} = require('./user-edit');
 
 document.addEventListener('DOMContentLoaded', function() {
 	// User form
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// User edit
 	const editButton = document.querySelector('.edit-button');
-	subscribeIfCan(editButton, 'click', enableValidation);
+	subscribeIfCan(editButton, 'click', enableEditing);
 });
 
 function subscribeIfCan(node, event, callback) {

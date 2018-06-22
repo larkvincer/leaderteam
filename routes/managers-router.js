@@ -9,7 +9,8 @@ const {canDo, getPermissions,
 const {getManagersByCreator, getManager} = require('./logic/managers');
 const User = require('../models/user');
 const {getUsernameValidators, getPasswordValidators,
-	getValidationErrorsHandler} = require('./middleware/user-validator');
+	getValidationErrorsHandler, getNameValidators,
+} = require('./middleware/user-validator');
 
 if (process.env.DEBUG) {
 	router.use(function(req, res, next) {
@@ -18,7 +19,7 @@ if (process.env.DEBUG) {
 				username: 'larkvincer',
 				role: 'manager',
 			};
-		};
+		}
 		next();
 	});
 }
@@ -67,7 +68,7 @@ router.get('/managers/form/add',
 	}));
 
 router.post('/managers', [
-	getUsernameValidators(), getPasswordValidators(),
+	...getUsernameValidators(), ...getPasswordValidators(),
 	getValidationErrorsHandler('/dashboard/managers/form/add'),
 ], wrapAsync(async function(req, res, next) {
 	const permissions = await getPermissions(req.user.role);
@@ -91,9 +92,23 @@ router.post('/managers', [
 	}
 }));
 
-router.put('/managers/:username/edit',
-	wrapAsync(function(req, res, next) {
-		res.send('I wanna die.');
-	}));
+router.put('/managers/:username', [
+	...getNameValidators(),
+	getValidationErrorsHandler(),
+], wrapAsync(async function(req, res, next) {
+	const permissions = await getPermissions(req.user.role);
+	if (canDo(permissions, actions.EDIT_MANAGER)) {
+		const result = await User.update({username: req.params.username},
+			{
+				$set: {
+					firstName: req.body.firstName,
+					lastName: req.body.lastName,
+				},
+			});
+		res.json(result);
+	} else {
+		throw new Error('Forbidden.');
+	}
+}));
 
 module.exports = router;
